@@ -1,5 +1,14 @@
 import pandas as pd
 import numpy as np
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
+from sklearn import metrics
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import KFold
 """
 ['PassengerId', 'Survived', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp',
        'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked']
@@ -186,8 +195,82 @@ class TitanicModel:
        dummy = train['Survived']
        return [model, dummy]
 
+    """
+    Learning Part
+    """
+    @staticmethod
+    def create_random_variables(train) -> str:
+        train2, test2 = train_test_split(train, test_size=0.3, random_state=0)
+        target_col = ['Pclass', 'Sex', 'Embarked']
+        train_X = train2[target_col]
+        train_Y = train2['Survived']
+        test_X = test2[target_col]
+        test_Y = test2['Survived']
 
+        features_one = train_X.values
+        target = train_Y.values
 
+        tree_model = DecisionTreeClassifier()
+        tree_model.fit(features_one, target)
+        dt_prediction = tree_model.predict(test_X)
+        accuracy = metrics.accuracy_score(dt_prediction, test_Y)
+        print('The accuracy of the Decision Tree is  ', accuracy)
+        return accuracy
+
+    @staticmethod
+    def create_k_fold():
+        k_fold = KFold(n_splits=10, shuffle=True, random_state=0)
+        return k_fold
+
+    def accuracy_by_knn(self, model, dummy) -> str:
+        clf = KNeighborsClassifier(n_neighbors=13)
+        scoring = 'accuracy'
+        k_fold = self.create_k_fold()
+        score = cross_val_score(clf, model, dummy, cv=k_fold,
+                                n_jobs=1, scoring=scoring)
+        accuracy = round(np.mean(score) * 100, 2)
+        return accuracy
+
+    def accuracy_by_dtree(self, model, dummy) -> str:
+        print('>>> 결정트리 방식 검증')  # 79.58
+        k_fold = self.create_k_fold()
+        clf = DecisionTreeClassifier()
+        scoring = 'accuracy'
+        score = cross_val_score(clf, model, dummy, cv=k_fold,
+                                n_jobs=1, scoring=scoring)
+        accuracy = round(np.mean(score) * 100, 2)
+        return accuracy
+
+    def accuracy_by_rforest(self, model, dummy) -> str:
+
+        print('>>> 램덤포레스트 방식 검증')  # 82.15
+        k_fold = self.create_k_fold()
+        clf = RandomForestClassifier(n_estimators=13)  # 13개의 결정트리를 사용함
+        scoring = 'accuracy'
+        score = cross_val_score(clf, model, dummy, cv=k_fold,
+                                n_jobs=1, scoring=scoring)
+        accuracy = round(np.mean(score) * 100, 2)
+        return accuracy
+
+    def accuracy_by_nb(self, model, dummy) -> str:
+        print('>>> 나이브베이즈 방식 검증')  # 79.57
+        clf = GaussianNB()
+        k_fold = self.create_k_fold()
+        scoring = 'accuracy'
+        score = cross_val_score(clf, model, dummy, cv=k_fold,
+                                n_jobs=1, scoring=scoring)
+        accuracy = round(np.mean(score) * 100, 2)
+        return accuracy
+
+    def accuracy_by_svm(self, model, dummy) -> str:
+        k_fold = self.create_k_fold()
+        print('>>> SVM 방식 검증')  # 83.05
+        clf = SVC()
+        scoring = 'accuracy'
+        score = cross_val_score(clf, model, dummy, cv=k_fold,
+                                n_jobs=1, scoring=scoring)
+        accuracy = round(np.mean(score) * 100, 2)
+        return accuracy
 
 
 
