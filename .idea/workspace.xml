@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8897bf4d-0b32-41b2-8167-f59980ed4e92" name="Default Changelist" comment="" />
+    <list default="true" id="8897bf4d-0b32-41b2-8167-f59980ed4e92" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chap_1_titanic_oop/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/chap_1_titanic_oop/model.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +17,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chap_1_titanic_oop/model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="77" column="17" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="17" />
+            <state relative-caret-position="494">
+              <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -46,6 +53,14 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>norminal</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -56,10 +71,12 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
+    <option name="x" value="-7" />
+    <option name="y" value="42" />
     <option name="width" value="1260" />
     <option name="height" value="767" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -83,6 +100,9 @@
         </subPane>
       </pane>
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -110,7 +130,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="0" width="1260" height="767" extended-state="0" />
+    <frame x="-7" y="42" width="1260" height="767" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24959083" />
@@ -149,8 +169,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chap_1_titanic_oop/model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="77" column="17" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="17" />
+        <state relative-caret-position="494">
+          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
