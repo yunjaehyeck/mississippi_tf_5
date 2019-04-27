@@ -1,4 +1,4 @@
-from chap_1_titanic_oop.data.model import TitanicModel
+from chap_1_titanic_oop.model import TitanicModel
 from chap_1_titanic_oop.view import TitanicView
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
