@@ -1,14 +1,10 @@
-from chap_1_titanic_oop.model import TitanicModel
+from chap_1_titanic_oop.data.model import TitanicModel
 from chap_1_titanic_oop.view import TitanicView
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from sklearn import metrics
-from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import train_test_split
-from sklearn.model_selection import KFold
+import pandas as pd
 
 class TitanicController:
 
@@ -42,8 +38,6 @@ class TitanicController:
     def create_dummy(self) -> object:
         train = self._train
         dummy = train['Survived']
-        print('--------- dummy info ---------')
-        print(dummy.info)
         return dummy
 
     @staticmethod
@@ -106,6 +100,23 @@ class TitanicController:
         print('---------------- SVM 방식 정확도 ----------------')
         accuracy = m.accuracy_by_svm(model, dummy)
         print(' {} %'.format(accuracy))
+
+    def submit(self):
+        m = self._m
+        model = self.create_model()
+        dummy = self.create_dummy()
+        test = m.test
+        test_id = m.test_id
+        clf = SVC()
+        clf.fit(model, dummy)
+        prediction = clf.predict(test)
+        submission = pd.DataFrame(
+            {'PassengerId' : test_id,
+             'Survived' : prediction}
+        )
+        print(submission.head())
+        submission.to_csv(m.context + 'submission.csv', index=False)
+
 
 
 

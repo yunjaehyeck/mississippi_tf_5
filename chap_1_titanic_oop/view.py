@@ -66,10 +66,7 @@ class TitanicView:
         df.plot(kind='bar', stacked=True, figsize=(10, 5))
         plt.show()
 
-    @staticmethod
-    def null_sum(train) -> int:
-        sum = train.isnull().sum()
-        return sum
+
 
 
 

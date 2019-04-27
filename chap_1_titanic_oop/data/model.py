@@ -32,6 +32,7 @@ class TitanicModel:
         self._fname = None
         self._train = None
         self._test = None
+        self._test_id = None
 
     @property
     def context(self) -> object: return self._context
@@ -57,6 +58,12 @@ class TitanicModel:
     @test.setter
     def test(self, test): self._test = test
 
+    @property
+    def test_id(self) -> object: return self._test_id
+
+    @test_id.setter
+    def test_id(self, test_id): self._test_id = test_id
+
     def new_file(self) -> str:
         return self._context + self._fname
 
@@ -74,6 +81,7 @@ class TitanicModel:
         t = self.title_nominal(t[0],t[1])
         print('--------- 4. name, PassengerId 삭제 ----------------')
         t = self.drop_feature(t[0],t[1],'Name')
+        self._test_id = test['PassengerId']
         t = self.drop_feature(t[0],t[1],'PassengerId')
         print('--------- 5. age 편집 ----------------')
         t = self.age_ordinal(t[0],t[1])
@@ -85,9 +93,18 @@ class TitanicModel:
         t = self.drop_feature(t[0],t[1],'Fare')
         print('--------- 9. sex 편집 ----------------')
         t = self.sex_nominal(t[0],t[1])
+        t[1] = t[1].fillna({"FareBand": 1}) # NaN 이면 1 로 채워라
+       # t[1] = t[1].drop('FareBand', axis=1) 지우면 모델과 피처수가 일치하지 않음
+        a = self.null_sum(t[1])
+        print('널의 수량 {} 개 '.format(a))
+        self._test = t[1]
+
         return t[0]
 
-
+    @staticmethod
+    def null_sum(train) -> int:
+        sum = train.isnull().sum()
+        return sum
 
     @staticmethod
     def drop_feature(train, test, feature) -> []:
