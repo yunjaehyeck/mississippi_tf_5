@@ -57,10 +57,19 @@ class TitanicController:
         test_Y = test2[the_Y_features]
         return [train_X, train_Y, test_X, test_Y]
 
+    @staticmethod
+    def accuracy_by_decision_tree(train_X, train_Y, test_X, test_Y) -> str:
+        tree_model = DecisionTreeClassifier()
+        tree_model.fit(train_X.values, train_Y.values)
+        dt_prediction = tree_model.predict(test_X)
+        accuracy = metrics.accuracy_score(dt_prediction, test_Y)
+        return accuracy
+
     """
     Learning Part
     """
     def test_random_variables(self) -> str:
+        print('------------랜덤변수를 활용한 검증---------------')
         train = self._train
         X_features = ['Pclass', 'Sex', 'Embarked']
         Y_features = ['Survived']
@@ -73,14 +82,37 @@ class TitanicController:
         )
         return accuracy
 
+    def test_by_sklearn(self):
+        print('------------사이킷런을 활용한 검증---------------')
+        model = self.create_model()
+        dummy = self.create_dummy()
+        m = self._m
+        print('---------------- KNN 방식 정확도 ----------------')
+        accuracy = m.accuracy_by_knn(model, dummy)
+        print(' {} %'.format(accuracy))
 
-    @staticmethod
-    def accuracy_by_decision_tree(train_X, train_Y,  test_X, test_Y) -> str:
-        tree_model = DecisionTreeClassifier()
-        tree_model.fit(train_X.values, train_Y.values)
-        dt_prediction = tree_model.predict(test_X)
-        accuracy = metrics.accuracy_score(dt_prediction, test_Y)
-        return accuracy
+        print('---------------- 결정트리 방식 정확도 ----------------')
+        accuracy = m.accuracy_by_dtree(model, dummy)
+        print(' {} %'.format(accuracy))
+
+        print('---------------- 랜덤포레스트 방식 정확도 ----------------')
+        accuracy = m.accuracy_by_rforest(model, dummy)
+        print(' {} %'.format(accuracy))
+
+        print('---------------- 나이브베이즈 방식 정확도 ----------------')
+        accuracy = m.accuracy_by_nb(model, dummy)
+        print(' {} %'.format(accuracy))
+
+        print('---------------- SVM 방식 정확도 ----------------')
+        accuracy = m.accuracy_by_svm(model, dummy)
+        print(' {} %'.format(accuracy))
+
+
+
+
+
+
+
 
 
 
